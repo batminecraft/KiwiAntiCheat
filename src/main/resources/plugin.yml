@@ -1,0 +1,38 @@
+name: KiwiAntiCheat
+main: fr.batminecraft.kiwianticheat.Main
+version: 1.2.0
+author: BatMinecraft
+prefix: Kiwi - AntiCheat
+api-version: '1.20'
+description: 'KiwiAnticheat - a simple anticheat'
+load: STARTUP
+commands:
+  topluck:
+    description: View players topluck list
+    permission: kiwiac.moderation
+    usage: /topluck <page>
+  report:
+    description: Rapporter un joueur suspect
+    usage: /report <player>
+  reports:
+    description: Reports list
+    permission: kiwiac.moderation
+    usage: /report
+  kiwianticheat:
+    description: Manage KiwiAntiCheat
+    usage: /kiwianticheat [services|status|discord] [all-services|all|<service-name>|test-link|disable|enable] [enable|disable]
+    permission: kiwiac.moderation
+    aliases:
+      - kac
+      - kiwiac
+      - kanticheat
+permissions:
+  kiwiac.bypass:
+    description: Bypass all detections
+    default: op
+  kiwiac.bypass.fly:
+    description: Bypass fly
+    default: op
+  kiwiac.moderation:
+    description: Permission for moderators, receive notifications...
+    default: op

@@ -1,0 +1,52 @@
+##################################################
+#                                                #
+#    KiwiAntiCheat - V1.2.0 - Configuration      #
+#                                                #
+##################################################
+
+#Souhaitez-vous utiliser MySQL ?
+#MySQL vous permettera d'enregister les logs dans une base de donnés au format JavaScript Object Notation.
+mysql:
+  enabled: false
+  connect:
+    ip: "127.0.0.1"
+    port: "3306"
+    data-base: "kac"
+    user: "root"
+    password: "MyPass123"
+
+
+#Activez ou désactivez les services / détecteurs
+#------------
+#  Services
+#------------
+services:
+  automod:
+    enabled: true
+  topluck:
+    enabled: true
+  report:
+    enabled: true
+  d-kiwilink:
+    enabled: false
+#------------
+# Détecteurs
+#------------
+sensors:
+  autoclick:
+    enabled: true
+  fly:
+    enabled: true
+  killaura:
+    enabled: true
+  nofall:
+    enabled: false
+  reach:
+    enabled: true
+  speedhack:
+    enabled: false
+
+#Discord Kiwi Link V1:
+d-kiwilink:
+  webhook-token: ""
+
