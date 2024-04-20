@@ -31,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import static fr.batminecraft.kiwianticheat.utils.PluginInfos.main;
@@ -66,11 +67,13 @@ public class FlySensor implements Listener {
     }
     private static boolean isRisingOrStatic(Player player) {
 
-        if(player.isOp() || player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR) || player.isFlying()) {
+        if(player.isOp() || player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR) || player.isFlying() || player.getPlayer().getPotionEffect(PotionEffectType.LEVITATION) != null || player.isGliding()) {
             lastTicksMap.remove(player.getUniqueId());
             lastYMap.remove(player.getUniqueId());
             return false;
         }
+
+
 
         if (player.getLocation().getBlockY() <= 1) {
             lastTicksMap.remove(player.getUniqueId());

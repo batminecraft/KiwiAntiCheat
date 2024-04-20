@@ -14,11 +14,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.json.JSONObject;
 
 import java.net.URI;
@@ -35,12 +35,19 @@ public class ReachSensor implements Listener {
             return;
         }
 
-        if(!(event.getDamager() instanceof Player)) {
+        if(!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof Player)) {
             return;
         }
         Player attacker = (Player) event.getDamager();
         Entity targetEntity = (Entity) event.getEntity();
+        if(targetEntity instanceof Fireball || targetEntity instanceof Arrow) {
+            return;
+        }
         double reach = getPlayerReach(attacker, targetEntity);
+
+        if(event.getCause().equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) || event.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)) {
+            return;
+        }
 
         if(attacker.hasPermission("kiwiac.bypass")) {
             return;

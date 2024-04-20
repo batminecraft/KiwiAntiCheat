@@ -1,6 +1,6 @@
 name: KiwiAntiCheat
 main: fr.batminecraft.kiwianticheat.Main
-version: 1.2.0
+version: 1.2.1
 author: BatMinecraft
 prefix: Kiwi - AntiCheat
 api-version: '1.20'

@@ -18,7 +18,11 @@ import fr.batminecraft.kiwianticheat.topluck.TopLuckSystem;
 import fr.batminecraft.kiwianticheat.utils.PluginInfos;
 import fr.batminecraft.kiwianticheat.utils.UtilsEvents;
 import fr.batminecraft.kiwianticheat.webhook.discord.DiscordWebHookLink;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.regex.PatternSyntaxException;
 
@@ -55,6 +59,7 @@ public class Main extends JavaPlugin {
         getCommand("kiwianticheat").setExecutor(new KiwiAntiCheatMainCommand());
         getCommand("kiwianticheat").setTabCompleter(new KACMCTabCompleter());
         getLogger().info("Initialzing database...");
+        new MessageTask().runTaskTimer(this, 0L, 20L * 60L * 10L);
         if(SqlLink.ENABLED) {
             if(SqlLink.testLink()) {
                 if(SqlLink.setupDataBase()) {
@@ -73,6 +78,26 @@ public class Main extends JavaPlugin {
 
         TopLuckSystem.startLogger();
         FlySensor.start();
+    }
+
+    private class MessageTask extends BukkitRunnable {
+        @Override
+        public void run() {
+            for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+                p.sendMessage("  §8§m§l§6-------========§4§lImportant§8§m§l§6========-------");
+                p.sendMessage("§8 ");
+                p.sendMessage("   " + PluginInfos.PREFIX + "Information importante sur les bugs");
+                p.sendMessage("§8 ");
+                p.sendMessage("   " + "§7§lVous avez été détecté par l'anticheat ? Cela était une erreur ? §a§nAlors§r §8»");
+                p.sendMessage("§8 ");
+                p.sendMessage("   " + "§7§lSignalez le bug sur §9Discord §f(rubrique Modération > Signalements de bugs).");
+                p.sendMessage("   " + "§7§nCela nous aidera vraiment à améliorer votre expérience de jeu ! Merci !");
+                p.sendMessage("§8 ");
+                p.sendMessage("  §8§m§l§6-------========§4§lImportant§8§m§l§6========-------");
+                p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
+            }
+
+        }
     }
 
     @Override
